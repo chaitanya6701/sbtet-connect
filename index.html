@@ -1,28 +1,152 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SBTET Connect</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
+<title>SBTET Connect - Telangana Diploma Student Portal</title>
 
-    <h1>SBTET CONNECT</h1>
-    <p>Telangana Diploma Student Portal</p>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
 
-    <h2>Useful Links</h2>
+body{
+    background:#f4f7fb;
+    color:#172033;
+}
 
-    <a href="https://sbtet.telangana.gov.in/" target="_blank">
-        Official SBTET Website
-    </a>
+header{
+    background:linear-gradient(135deg,#073b8c,#0b63ce);
+    color:white;
+    padding:22px 18px;
+}
 
-    <br><br>
+.logo{
+    font-size:27px;
+    font-weight:bold;
+}
 
-    <a href="#">Results</a><br>
-    <a href="#">C24 Syllabus</a><br>
-    <a href="#">Previous Papers</a><br>
-    <a href="#">Exam Time Table</a><br>
-    <a href="#">Hall Tickets</a><br>
-    <a href="#">SGPA Calculator</a>
+.tagline{
+    margin-top:6px;
+    font-size:14px;
+    opacity:.9;
+}
 
-</body>
-</html>
+nav{
+    margin-top:18px;
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    background:rgba(255,255,255,.15);
+    padding:9px 13px;
+    border-radius:20px;
+    white-space:nowrap;
+    font-size:13px;
+}
+
+.hero{
+    padding:25px 18px;
+    background:white;
+}
+
+.hero h1{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.hero p{
+    color:#667085;
+    line-height:1.5;
+}
+
+.search{
+    margin-top:18px;
+    width:100%;
+    padding:14px;
+    border:1px solid #d9dee8;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+}
+
+.container{
+    padding:20px 16px;
+    max-width:900px;
+    margin:auto;
+}
+
+.section-title{
+    font-size:21px;
+    margin:8px 0 15px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.card{
+    background:white;
+    padding:18px 14px;
+    border-radius:15px;
+    text-decoration:none;
+    color:#172033;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+.icon{
+    font-size:27px;
+    margin-bottom:9px;
+}
+
+.card h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.card p{
+    font-size:12px;
+    color:#737b8c;
+}
+
+.notice{
+    background:white;
+    border-radius:15px;
+    padding:17px;
+    margin-top:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.notice strong{
+    color:#0b63ce;
+}
+
+.calculator{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.calculator input{
+    width:100%;
+    padding:12px;
+    margin:7px 0;
+    border:1px solid #ddd;
+    border-radius:9px;
+}
