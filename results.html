@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chaitanya's SBTET - Results</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#172033;
+}
+
+header{
+    background:linear-gradient(135deg,#073b8c,#0b63ce);
+    color:white;
+    padding:22px 18px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.subtitle{
+    margin-top:6px;
+    font-size:13px;
+    opacity:.9;
+}
+
+.container{
+    max-width:600px;
+    margin:auto;
+    padding:20px 16px;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:18px;
+    text-decoration:none;
+    color:#0b63ce;
+    font-weight:bold;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:8px;
+    font-size:27px;
+}
+
+.description{
+    text-align:center;
+    color:#667085;
+    margin-bottom:22px;
+    line-height:1.5;
+}
+
+.box{
+    background:white;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+label{
+    display:block;
+    margin-top:14px;
+    margin-bottom:6px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid #d9dee8;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:20px;
+    border:0;
+    border-radius:10px;
+    background:#0b63ce;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.info{
+    margin-top:18px;
+    background:#eef6ff;
+    padding:14px;
+    border-radius:12px;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.disclaimer{
+    margin-top:18px;
+    background:#fff7df;
+    border:1px solid #f0d98a;
+    padding:14px;
+    border-radius:12px;
+    font-size:12px;
+    line-height:1.5;
+}
+
+footer{
+    margin-top:30px;
+    background:#101828;
+    color:#cbd5e1;
+    padding:22px;
+    text-align:center;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">🎓 CHAITANYA'S SBTET</div>
+
+<div class="subtitle">
+Telangana Diploma Student Portal
+</div>
+</header>
+
+<div class="container">
+
+<a class="back" href="index.html">
+← Back to Home
+</a>
+
+<h1 class="title">
+📊 Check Your Result
+</h1>
+
+<p class="description">
+Enter your details below to check your diploma examination result.
+</p>
+
+<div class="box">
+
+<label>Student PIN</label>
+
+<input
+type="text"
+id="pin"
+placeholder="Enter your PIN"
+maxlength="20">
+
+<label>Regulation</label>
+
+<select id="regulation">
+<option value="">Select Regulation</option>
+<option>C24</option>
+<option>C23</option>
+<option>C21</option>
+</select>
+
+<label>Semester</label>
+
+<select id="semester">
+<option value="">Select Semester</option>
+<option>1st Semester</option>
+<option>2nd Semester</option>
+<option>3rd Semester</option>
+<option>4th Semester</option>
+<option>5th Semester</option>
+<option>6th Semester</option>
+</select>
+
+<button onclick="checkResult()">
+🔎 CHECK RESULT
+</button>
+
+</div>
+
+<div id="message"></div>
+
+<div class="info">
+<strong>ℹ️ Note</strong><br><br>
+Enter your correct PIN and select your regulation
+and semester.
+</div>
+
+<div class="disclaimer">
+<strong>⚠️ Disclaimer</strong><br><br>
+Chaitanya's SBTET is an independent student platform
+and is not an official website of SBTET Telangana.
+For official information, verify details on the official
+SBTET website.
+</div>
+
+</div>
+
+<footer>
+
+<strong>🎓 CHAITANYA'S SBTET</strong>
+
+<br><br>
+
+Telangana Diploma Student Portal
+
+<br><br>
+
+© 2026 Chaitanya's SBTET
+
+</footer>
+
+<script>
+
+function checkResult(){
+
+let pin=document.getElementById("pin").value.trim();
+let regulation=document.getElementById("regulation").value;
+let semester=document.getElementById("semester").value;
+let message=document.getElementById("message");
+
+if(pin==="" || regulation==="" || semester===""){
+
+message.innerHTML=`
+<div class="info">
+⚠️ Please enter your PIN and select
+regulation and semester.
+</div>
+`;
+
+return;
+}
+
+message.innerHTML=`
+<div class="info">
+
+<strong>🔎 Result Search</strong>
+
+<br><br>
+
+PIN: ${pin}<br>
+Regulation: ${regulation}<br>
+Semester: ${semester}
+
+<br><br>
+
+Result-data connection is not configured yet.
+
+</div>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
