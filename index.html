@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SBTET Connect - Telangana Diploma Student Portal</title>
+<title>SBTET Connect | Telangana Diploma Student Portal</title>
 
 <style>
 *{
@@ -103,6 +103,7 @@ nav a{
     color:#172033;
     box-shadow:0 3px 12px rgba(0,0,0,.06);
     transition:.2s;
+    display:block;
 }
 
 .card:hover{
@@ -143,10 +144,388 @@ nav a{
     box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
+.calculator p{
+    color:#667085;
+    margin-bottom:10px;
+}
+
 .calculator input{
     width:100%;
     padding:12px;
     margin:7px 0;
     border:1px solid #ddd;
     border-radius:9px;
+    font-size:15px;
 }
+
+button{
+    width:100%;
+    padding:13px;
+    background:#0b63ce;
+    color:white;
+    border:0;
+    border-radius:9px;
+    font-size:15px;
+    margin-top:8px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:12px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.disclaimer{
+    margin:20px 0;
+    background:#fff7df;
+    border:1px solid #f0d98a;
+    padding:14px;
+    border-radius:12px;
+    font-size:12px;
+    line-height:1.5;
+}
+
+footer{
+    background:#101828;
+    color:#cbd5e1;
+    text-align:center;
+    padding:25px 15px;
+    margin-top:25px;
+    font-size:13px;
+}
+
+footer b{
+    color:white;
+}
+
+@media(max-width:420px){
+    .grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">🎓 SBTET CONNECT</div>
+
+<div class="tagline">
+Telangana Diploma Student Portal
+</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#notifications">Updates</a>
+<a href="#calculator">Calculator</a>
+</nav>
+
+</header>
+
+
+<section class="hero" id="home">
+
+<h1>Welcome, Diploma Students 👋</h1>
+
+<p>
+Your simple place for SBTET Telangana diploma resources,
+exam information, study materials and useful student tools.
+</p>
+
+<input
+class="search"
+id="search"
+type="text"
+placeholder="🔎 Search student services..."
+onkeyup="searchCards()">
+
+</section>
+
+
+<div class="container">
+
+<h2 class="section-title" id="services">
+📚 Student Services
+</h2>
+
+<div class="grid">
+
+
+<!-- RESULTS -->
+
+<a
+class="card"
+href="https://www.sbtet.telangana.gov.in/index.html#!/index/DiplomaStudentResult"
+target="_blank">
+
+<div class="icon">📊</div>
+
+<h3>Results</h3>
+
+<p>Check official SBTET results</p>
+
+</a>
+
+
+<!-- OFFICIAL WEBSITE -->
+
+<a
+class="card"
+href="https://www.sbtet.telangana.gov.in/"
+target="_blank">
+
+<div class="icon">🌐</div>
+
+<h3>Official SBTET</h3>
+
+<p>Visit official SBTET website</p>
+
+</a>
+
+
+<!-- C24 SYLLABUS -->
+
+<a class="card" href="#">
+
+<div class="icon">📚</div>
+
+<h3>C24 Syllabus</h3>
+
+<p>View diploma syllabus</p>
+
+</a>
+
+
+<!-- PREVIOUS PAPERS -->
+
+<a class="card" href="#">
+
+<div class="icon">📝</div>
+
+<h3>Previous Papers</h3>
+
+<p>Practice previous exams</p>
+
+</a>
+
+
+<!-- TIME TABLE -->
+
+<a class="card" href="#">
+
+<div class="icon">📅</div>
+
+<h3>Time Table</h3>
+
+<p>Check examination timetable</p>
+
+</a>
+
+
+<!-- HALL TICKET -->
+
+<a class="card" href="#">
+
+<div class="icon">🎫</div>
+
+<h3>Hall Ticket</h3>
+
+<p>Hall ticket information</p>
+
+</a>
+
+
+<!-- ECET -->
+
+<a class="card" href="#">
+
+<div class="icon">🎓</div>
+
+<h3>ECET</h3>
+
+<p>Engineering entrance information</p>
+
+</a>
+
+
+<!-- SGPA -->
+
+<a class="card" href="#calculator">
+
+<div class="icon">🧮</div>
+
+<h3>SGPA Calculator</h3>
+
+<p>Calculate your SGPA</p>
+
+</a>
+
+
+</div>
+
+
+<h2 class="section-title" id="notifications">
+
+🔔 Latest Updates
+
+</h2>
+
+
+<div class="notice">
+
+<strong>📌 Important</strong>
+
+<br><br>
+
+Always verify official examination notifications,
+results and announcements on the official SBTET website.
+
+</div>
+
+
+<div class="notice">
+
+<strong>📚 Study Tip</strong>
+
+<br><br>
+
+Previous question papers can help students understand
+important topics and examination patterns.
+
+</div>
+
+
+<h2 class="section-title" id="calculator">
+
+🧮 SGPA Calculator
+
+</h2>
+
+
+<div class="calculator">
+
+<p>
+Enter your total grade points and total credits.
+</p>
+
+<input
+type="number"
+id="points"
+placeholder="Total Grade Points">
+
+<input
+type="number"
+id="credits"
+placeholder="Total Credits">
+
+<button onclick="calculateSGPA()">
+
+Calculate SGPA
+
+</button>
+
+<div id="result"></div>
+
+</div>
+
+
+<div class="disclaimer">
+
+<strong>⚠️ Disclaimer</strong>
+
+<br><br>
+
+SBTET Connect is an independent student platform
+and is <strong>not an official website of SBTET Telangana</strong>.
+
+For official information, always verify details
+on the official SBTET website.
+
+</div>
+
+</div>
+
+
+<footer>
+
+<b>🎓 SBTET CONNECT</b>
+
+<br><br>
+
+Telangana Diploma Student Portal
+
+<br><br>
+
+© 2026 SBTET Connect
+
+</footer>
+
+
+<script>
+
+function calculateSGPA(){
+
+let points =
+parseFloat(document.getElementById("points").value);
+
+let credits =
+parseFloat(document.getElementById("credits").value);
+
+if(
+isNaN(points) ||
+isNaN(credits) ||
+credits <= 0
+){
+
+document.getElementById("result").innerHTML =
+"⚠️ Please enter valid values.";
+
+return;
+
+}
+
+let sgpa = points / credits;
+
+document.getElementById("result").innerHTML =
+"🎓 Your SGPA: " + sgpa.toFixed(2);
+
+}
+
+
+function searchCards(){
+
+let input =
+document.getElementById("search").value.toLowerCase();
+
+let cards =
+document.querySelectorAll(".card");
+
+cards.forEach(function(card){
+
+let text =
+card.innerText.toLowerCase();
+
+if(text.includes(input)){
+
+card.style.display="block";
+
+}
+
+else{
+
+card.style.display="none";
+
+}
+
+});
+
+}
+
+</script>
+
+</body>
+    </html>
