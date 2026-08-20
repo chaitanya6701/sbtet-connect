@@ -224,46 +224,250 @@ Telangana Diploma Student Portal
 
 <script>
 
-function checkResult(){
+async function checkResult(){
 
-let pin=document.getElementById("pin").value.trim();
-let regulation=document.getElementById("regulation").value;
-let semester=document.getElementById("semester").value;
-let message=document.getElementById("message");
+    const pin = document.getElementById("pin").value.trim();
+    const regulation = document.getElementById("regulation").value;
+    const semester = document.getElementById("semester").value;
+    const message = document.getElementById("message");
 
-if(pin==="" || regulation==="" || semester===""){
+    if(pin === "" || regulation === "" || semester === ""){
+        message.innerHTML = `
+        <div class="info">
+            ⚠️ Please enter your PIN and select regulation and semester.
+        </div>`;
+        return;
+    }
 
-message.innerHTML=`
-<div class="info">
-⚠️ Please enter your PIN and select
-regulation and semester.
-</div>
-`;
+    // Currently configured for C24 4th Semester
+    if(regulation !== "C24" || semester !== "4th Semester"){
+        message.innerHTML = `
+        <div class="info">
+            ℹ️ Real API lookup is currently configured for
+            <strong>C24 – 4th Semester</strong>.
+        </div>`;
+        return;
+    }
 
-return;
-}
+    message.innerHTML = `
+    <div class="info">
+        🔄 Fetching your result...
+    </div>`;
 
-message.innerHTML=`
-<div class="info">
+    const params = new URLSearchParams({
+        ExamMonthYearId: "99",
+        ExamTypeId: "5",
+        Pin: pin,
+        SchemeId: "11",
+        SemYearId: "4",
+        StudentTypeId: "1"
+    });
 
-<strong>🔎 Result Search</strong>
+    const apiUrl =
+        "https://www.sbtet.telangana.gov.in/api/api/Results/GetStudentWiseReport?" +
+        params.toString();
 
-<br><br>
+    try {
 
-PIN: ${pin}<br>
-Regulation: ${regulation}<br>
-Semester: ${semester}
+        const response = await fetch(apiUrl);
 
-<br><br>
+        if(!response.ok){
+            throw new Error("HTTP " + response.status);
+        }
 
-Result-data connection is not configured yet.
+        const data = await response.json();
 
-</div>
-`;
+        if(!Array.isArray(data) || !data.length){
+            throw new Error("Result not found");
+        }
 
+        const result = data[0];
+
+        const student = result.studentInfo?.[0];
+        const subjects = result.studentWiseReport || [];
+        const sgpaInfo = result.studentSGPACGPAInfo?.[0];
+        const totalInfo = result.studentSubjectTotal?.[0];
+
+        if(!student){
+            throw new Error("Student result not found");
+        }
+
+        let subjectsHTML = "";
+
+        subjects.forEach(subject => {
+
+            subjectsHTML += `
+            <div style="
+                background:#f8fafc;
+                border:1px solid #e5e7eb;
+                border-radius:12px;
+                padding:15px;
+                margin-top:12px;
+            ">
+
+                <strong>${subject.SubjectName}</strong>
+
+                <div style="
+                    font-size:13px;
+                    color:#667085;
+                    margin-top:5px;
+                ">
+                    ${subject.Subject_Code}
+                </div>
+
+                <hr style="
+                    border:0;
+                    border-top:1px solid #e5e7eb;
+                    margin:12px 0;
+                ">
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(3,1fr);
+                    gap:8px;
+                    text-align:center;
+                ">
+
+                    <div>
+                        <small>Total</small><br>
+                        <strong>${subject.SubjectTotal}</strong>
+                    </div>
+
+                    <div>
+                        <small>Grade</small><br>
+                        <strong>${subject.HybridGrade}</strong>
+                    </div>
+
+                    <div>
+                        <small>Grade Point</small><br>
+                        <strong>${subject.GradePoint}</strong>
+                    </div>
+
+                </div>
+
+                <div style="
+                    margin-top:10px;
+                    font-size:13px;
+                ">
+                    Mid 1: ${subject.MID1_MARKS}
+                    &nbsp; | &nbsp;
+                    Mid 2: ${subject.MID2_MARKS}
+                    &nbsp; | &nbsp;
+                    End Sem: ${subject.EndSemMarks}
+                </div>
+
+                <div style="
+                    margin-top:8px;
+                    font-weight:bold;
+                ">
+                    Result: ${subject.Result}
+                </div>
+
+            </div>`;
+        });
+
+        message.innerHTML = `
+
+        <div class="box" style="margin-top:18px;">
+
+            <h2 style="text-align:center;">
+                🎓 Examination Result
+            </h2>
+
+            <div class="info">
+
+                <strong>${student.StudentName}</strong><br><br>
+
+                PIN: ${student.Pin}<br>
+                Branch: ${student.BranchName}<br>
+                Semester: ${student.Sem}<br>
+                College: ${student.CollegeName}
+
+            </div>
+
+            <div style="
+                display:grid;
+                grid-template-columns:repeat(3,1fr);
+                gap:10px;
+                margin-top:15px;
+                text-align:center;
+            ">
+
+                <div class="info">
+                    <small>SGPA</small><br>
+                    <strong style="font-size:22px;">
+                        ${sgpaInfo?.SGPA ?? "-"}
+                    </strong>
+                </div>
+
+                <div class="info">
+                    <small>CGPA</small><br>
+                    <strong style="font-size:22px;">
+                        ${sgpaInfo?.CGPA ?? "-"}
+                    </strong>
+                </div>
+
+                <div class="info">
+                    <small>Result</small><br>
+                    <strong style="font-size:20px;">
+                        ${totalInfo?.Result ?? "-"}
+                    </strong>
+                </div>
+
+            </div>
+
+            <h3 style="margin-top:22px;">
+                📚 Subject-wise Result
+            </h3>
+
+            ${subjectsHTML}
+
+            <div class="info" style="margin-top:18px;">
+
+                <strong>Credits</strong><br><br>
+
+                Total Credits:
+                ${totalInfo?.TotalCredits ?? "-"}<br>
+
+                Credits Earned:
+                ${totalInfo?.TotalCreditsEarned ?? "-"}
+
+            </div>
+
+            <div style="
+                text-align:center;
+                margin-top:18px;
+                font-size:12px;
+                color:#667085;
+            ">
+                Result retrieved from the SBTET result service.
+            </div>
+
+        </div>`;
+
+    } catch(error) {
+
+        console.error(error);
+
+        message.innerHTML = `
+        <div class="disclaimer">
+
+            <strong>❌ Unable to fetch result</strong>
+
+            <br><br>
+
+            The SBTET result service could not be reached from this
+            website.
+
+            <br><br>
+
+            Please check your PIN and try again.
+
+        </div>`;
+
+    }
 }
 
 </script>
-
 </body>
 </html>
